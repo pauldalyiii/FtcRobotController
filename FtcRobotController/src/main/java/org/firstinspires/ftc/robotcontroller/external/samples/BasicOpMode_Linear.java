@@ -10,6 +10,9 @@ import com.qualcomm.robotcore.util.Range;
 @Disabled
 public class BasicOpMode_Linear extends LinearOpMode implements RobotOpMode {
 
+    private static final double POWER_MIN = -1.0;
+    private static final double POWER_MAX = 1.0;
+    
     private ElapsedTime runtime = new ElapsedTime();
     private DcMotor leftDrive = null;
     private DcMotor rightDrive = null;
@@ -41,8 +44,8 @@ public class BasicOpMode_Linear extends LinearOpMode implements RobotOpMode {
     public void execute() {
         double drive = -gamepad1.left_stick_y;
         double turn = gamepad1.right_stick_x;
-        double leftPower = Range.clip(drive + turn, -1.0, 1.0);
-        double rightPower = Range.clip(drive - turn, -1.0, 1.0);
+        double leftPower = Range.clip(drive + turn, POWER_MIN, POWER_MAX);
+        double rightPower = Range.clip(drive - turn, POWER_MIN, POWER_MAX);
 
         leftDrive.setPower(leftPower);
         rightDrive.setPower(rightPower);
